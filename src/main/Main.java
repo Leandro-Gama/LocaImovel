@@ -12,6 +12,7 @@ public class Main {
 	
 	public static float getValorReferenciaImovel(Imovel imovel, int sazonalidade) {
 		float retorno = 0f;
+		int u = 0;
 		
 		if(imovel instanceof UnidadeAutonoma) {
 			UnidadeAutonoma uniAtemp = (UnidadeAutonoma)imovel;
