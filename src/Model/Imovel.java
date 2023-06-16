@@ -1,20 +1,45 @@
 package Model;
 
-public class Imovel {
+public abstract class Imovel {
 	private int iptu;
 	private Endereco endereco;
 	private String tipo;
 	private String utilizacao;
+	private Agenda agenda;
 	
 	// Constructors
-	public Imovel(int iptu, Endereco endereco, String tipo, String utilizacao) {
+	public Imovel(int iptu, String tipo, String utilizacao, int cep, String logradouro, int numero, String complemento, String bairro,
+				  String cidade, String estado) {
 		this.iptu = iptu;
-		this.endereco = endereco;
+		this.endereco = new Endereco(cep, logradouro, numero, complemento, bairro, cidade, estado);
+		this.tipo = tipo;
+		this.utilizacao = utilizacao;
+	}
+
+	public Imovel(int iptu, String tipo, String utilizacao, int cep, String logradouro, int numero, String complemento, String bairro) {
+		this.iptu = iptu;
+		this.endereco = new Endereco(cep, logradouro, numero, complemento, bairro);
 		this.tipo = tipo;
 		this.utilizacao = utilizacao;
 	}
 	
-	// Getters e Setters
+	// Methods
+	public void atualizaEndereco(int cep, String logradouro, int numero, String complemento, String bairro, String cidade, String estado) {
+		this.endereco.atualizaEndereco(cep, logradouro, numero, complemento, bairro, cidade, estado);;
+	}
+	public void atualizaEndereco(int cep, String logradouro, int numero, String complemento, String bairro) {
+		this.endereco.atualizaEndereco(cep, logradouro, numero, complemento, bairro);;
+	}
+	public String toString() {
+		String retorno = "Tipo: " + this.tipo + "\tUtilização: " + this.utilizacao + "\tIPTU: " + this.iptu + "\t" + this.endereco.toString() ;
+		
+		if(this.agenda != null) {
+			retorno += "\t" + this.agenda.toString();
+		}
+		return retorno;
+	}
+	
+	// Getters and Setters
 	public int getIptu() {
 		return iptu;
 	}
@@ -38,6 +63,14 @@ public class Imovel {
 	}
 	public void setUtilizacao(String utilizacao) {
 		this.utilizacao = utilizacao;
+	}
+
+	public Agenda getAgenda() {
+		return agenda;
+	}
+
+	public void setAgenda(Agenda agenda) {
+		this.agenda = agenda;
 	}
 	
 }
